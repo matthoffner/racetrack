@@ -18,6 +18,6 @@ window.setInterval(() => {
     }
   })
 
-  document.title = 'racetrack'
+  document.title = 'walkoff'
   window.postMessage({ type: 'REC_CLIENT_PLAY', data: { url: window.location.origin } }, '*')
 }, 100);

@@ -1,9 +1,9 @@
 {
-  "name": "racetrack",
-  "version": "0.0.2",
+  "name": "walkoff",
+  "version": "0.0.4",
   "description": "Load two pages, record video in webm format. Outputs html file that autoplays pages side by side.",
   "bin": {
-    "racetrack": "./racetrack.js"
+    "walkoff": "./walkoff.js"
   },
   "keywords": [
     "record",

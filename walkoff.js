@@ -1,16 +1,17 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-
 const open = require('open');
 
-var size = process.argv[4] || '1280x720', width = parseInt(size.split('x')[0]), height = parseInt(size.split('x')[1]), length = process.argv[5]; length = process.argv[5] ? parseInt(length.replace('s','')) : 5; 
+const size = process.argv[4] || '1280x720', width = parseInt(size.split('x')[0]),;
+const height = parseInt(size.split('x')[1]);
+const length = process.argv[5] ? parseInt(length.replace('s','')) : 5;
 
-var options = {
+const options = {
   headless: false,
   args: [
     '--enable-usermedia-screen-capturing',
     '--allow-http-screen-capture',
-    '--auto-select-desktop-capture-source=racetrack',
+    '--auto-select-desktop-capture-source=walkoff',
     '--load-extension=' + __dirname,
     '--disable-extensions-except=' + __dirname,
     '--disable-infobars',
@@ -67,7 +68,7 @@ async function main(url) {
     await page.evaluate(filename=>{
       window.postMessage({type: 'SET_EXPORT_PATH', filename: filename}, '*')
     }, exportname);
-    await page.waitFor(5 * 1000);
+    await page.waitFor(length * 1000);
     await page.evaluate(filename=>{
       window.postMessage({type: 'REC_STOP'}, '*')
     }, exportname);
