@@ -25,18 +25,18 @@ const NETWORK_CONFIG_4G = {
   'latency': 20
 }
 
-const player = (a, b) => `<html>
+const player = (a, b, width, height) => `<html>
 <style>
     body {
         text-align: center;
     }
 </style>
 <body>
-    <video controls autoplay muted width="48%">
-        <source src="./video/${a}" type="video/webm">
+    <video controls autoplay muted width="${width}" height="${height}">
+        <source src="./${a}" type="video/webm">
     </video>
-    <video controls autoplay muted width="48%">
-        <source src="./video/${b}" type="video/webm">
+    <video controls autoplay muted width="${width}" height="${height}">
+        <source src="./${b}" type="video/webm">
     </video>
 </body>
 </html>`;
@@ -73,7 +73,7 @@ async function main(url) {
     }, exportname);
     await page.waitForSelector('html.downloadComplete', {timeout: 0});
     await browser.close();
-    await moveFile(`/Users/matthoffner/Downloads/${exportname}`, `./video/${exportname}`);
+    await moveFile(`/Users/matthoffner/Downloads/${exportname}`, `./${exportname}`);
     return exportname;
 }
 
@@ -86,7 +86,7 @@ async function init() {
   }
   const video1 = await main(urls[0]);
   const video2 = await main(urls[1]);
-  const html = player(video1, video2);
+  const html = player(video1, video2, width, height);
   const filename = `${video1}-${video2}-${Date.now()}.html`;
   await fs.promises.writeFile(filename, html)
   open(`${process.cwd()}/${filename}`)
