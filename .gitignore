@@ -1,0 +1,4 @@
+*.webm
+*.html
+node_modules/
+.vscode/

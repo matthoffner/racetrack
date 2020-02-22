@@ -1,0 +1,19 @@
+{
+  "name": "racetrack",
+  "version": "0.0.1",
+  "description": "Load two pages, record video in webm format. Outputs html file that autoplays pages side by side.",
+  "bin": {
+    "racetrack": "./racetrack.js"
+  },
+  "keywords": [
+    "record",
+    "chrome",
+    "puppeteer",
+    "screencast"
+  ],
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "open": "^7.0.0",
+    "puppeteer": "^2.0.0"
+  }
+}
