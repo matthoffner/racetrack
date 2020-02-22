@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const open = require('open');
 
-const size = process.argv[4] || '1280x720', width = parseInt(size.split('x')[0]),;
+const size = process.argv[4] || '1280x720', width = parseInt(size.split('x')[0]);
 const height = parseInt(size.split('x')[1]);
 const length = process.argv[5] ? parseInt(length.replace('s','')) : 5;
 
