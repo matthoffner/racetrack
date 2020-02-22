@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
-const fsp = require('fs').promises;
+const fs = require('fs');
+
 const open = require('open');
 
 var size = process.argv[4] || '1280x720', width = parseInt(size.split('x')[0]), height = parseInt(size.split('x')[1]), length = process.argv[5]; length = process.argv[5] ? parseInt(length.replace('s','')) : 5; 
@@ -32,15 +33,26 @@ const player = (a, b) => `<html>
 </style>
 <body>
     <video controls autoplay muted width="48%">
-        <source src="${a}"
-                type="video/webm">
+        <source src="./video/${a}" type="video/webm">
     </video>
     <video controls autoplay muted width="48%">
-        <source src="${b}"
-                type="video/webm">
+        <source src="./video/${b}" type="video/webm">
     </video>
 </body>
 </html>`;
+
+async function moveFile(fromPath, toPath) {
+  return new Promise(function (resolve, reject) {
+      fs.rename(fromPath, toPath, function (err) {
+          if (err) {
+              reject(new Error('File did not move.'));
+              throw err;
+          } else {
+              resolve();
+          }
+      });
+  });
+}
 
 async function main(url) {
     const exportname = url.replace('https://','') + '-' + width + 'x' + height + '.webm';
@@ -49,7 +61,6 @@ async function main(url) {
     const page = pages[0];
     await page._client.send('Emulation.clearDeviceMetricsOverride');
     await page._client.send('Network.emulateNetworkConditions', NETWORK_CONFIG_4G);
-    await page._client.send('Page.setDownloadBehavior', {behavior: 'allow', downloadPath: `${process.cwd()}` });
     await page.setViewport({width: width, height: height, deviceScaleFactor: 1});
     await page.goto(url, {waitUntil: 'networkidle2'});
     await page.setBypassCSP(true);
@@ -62,6 +73,7 @@ async function main(url) {
     }, exportname);
     await page.waitForSelector('html.downloadComplete', {timeout: 0});
     await browser.close();
+    await moveFile(`/Users/matthoffner/Downloads/${exportname}`, `./video/${exportname}`);
     return exportname;
 }
 
@@ -74,9 +86,9 @@ async function init() {
   }
   const video1 = await main(urls[0]);
   const video2 = await main(urls[1]);
-  const html = player(video1, video2)
+  const html = player(video1, video2);
   const filename = `${video1}-${video2}-${Date.now()}.html`;
-  await fsp.writeFile(filename, html)
+  await fs.promises.writeFile(filename, html)
   open(`${process.cwd()}/${filename}`)
 }
 

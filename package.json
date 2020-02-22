@@ -1,6 +1,6 @@
 {
   "name": "racetrack",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Load two pages, record video in webm format. Outputs html file that autoplays pages side by side.",
   "bin": {
     "racetrack": "./racetrack.js"

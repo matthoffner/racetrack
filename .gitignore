@@ -2,3 +2,4 @@
 *.html
 node_modules/
 .vscode/
+video/*.webm

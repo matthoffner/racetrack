@@ -4,8 +4,6 @@ Load two pages, record video in webm format. Outputs html file that autoplays pa
 
 Unlike puppetcam, racetrack begins recording immediately rather than onload.
 
-![](./demo.gif)
-
 ## usage
 
 ```sh
@@ -13,7 +11,7 @@ npm install
 ```
 
 ```sh
-npx racetrack https://cnn.com https://amazon.com
+node racetrack.js https://nike.com https://adidas.com
 ```
 
 ## credits
