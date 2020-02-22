@@ -1,6 +1,6 @@
 {
   "name": "walkoff",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Load two pages, record video in webm format. Outputs html file that autoplays pages side by side.",
   "bin": {
     "walkoff": "./walkoff.js"
