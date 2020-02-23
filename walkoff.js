@@ -2,7 +2,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const open = require('open');
-
+const os = require('os');
 const size = process.argv[4] || '1280x720', width = parseInt(size.split('x')[0]);
 const height = parseInt(size.split('x')[1]);
 const length = process.argv[5] ? parseInt(length.replace('s','')) : 5;
@@ -75,7 +75,7 @@ async function main(url) {
     }, exportname);
     await page.waitForSelector('html.downloadComplete', {timeout: 0});
     await browser.close();
-    await moveFile(`/Users/matthoffner/Downloads/${exportname}`, `./${exportname}`);
+    await moveFile(`${os.homedir()}/Downloads/${exportname}`, `./${exportname}`);
     return exportname;
 }
 
